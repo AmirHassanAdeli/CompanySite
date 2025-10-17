@@ -13,6 +13,24 @@ body {
     line-height: 1.6;
 }
 
+/* === Custom Scrollbar === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #00d4ff, #6a5acd);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00b8e6, #5a4cb2);
+}
+
 /* === Navigation === */
 .navbar {
     background: rgba(10, 10, 10, 0.95);
@@ -71,6 +89,19 @@ body {
     z-index: 2;
 }
 
+.hero-badge {
+    margin-bottom: 20px;
+}
+
+.badge-text {
+    background: linear-gradient(135deg, #00d4ff, #6a5acd);
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+}
+
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
@@ -80,6 +111,10 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: glow 2s ease-in-out infinite alternate;
+}
+
+.title-word {
+    display: block;
 }
 
 @keyframes glow {
@@ -160,12 +195,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
 }
 
-/* === Services Section === */
-.services-section {
-    padding: 100px 0;
-    background: #0f0f0f;
-}
-
+/* === Sections Common Styles === */
 .section-title {
     font-size: 3rem;
     font-weight: 700;
@@ -182,6 +212,12 @@ body {
     color: #c0c0c0;
     font-size: 1.2rem;
     margin-bottom: 60px;
+}
+
+/* === Services Section === */
+.services-section {
+    padding: 100px 0;
+    background: #0f0f0f;
 }
 
 .service-card {
@@ -230,6 +266,23 @@ body {
 .portfolio-section {
     padding: 100px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    position: relative;
+}
+
+.portfolio-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(106,90,205,0.03)" points="0,0 1000,1000 0,1000"/></svg>');
+    background-size: cover;
+}
+
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
 }
 
 .portfolio-card {
@@ -240,16 +293,17 @@ body {
     transition: all 0.4s ease;
     margin-bottom: 30px;
     height: 100%;
+    backdrop-filter: blur(10px);
 }
 
 .portfolio-card:hover {
     transform: translateY(-15px) scale(1.02);
     box-shadow: 0 25px 50px rgba(106, 90, 205, 0.3);
+    border-color: rgba(0, 212, 255, 0.5);
 }
 
 .portfolio-image {
     height: 200px;
-    background: linear-gradient(135deg, #00d4ff 0%, #6a5acd 50%, #c0c0c0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,6 +311,16 @@ body {
     color: white;
     position: relative;
     overflow: hidden;
+}
+
+.portfolio-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .portfolio-content {
@@ -268,12 +332,17 @@ body {
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 15px;
+    line-height: 1.4;
 }
 
 .portfolio-description {
     color: #c0c0c0;
     line-height: 1.6;
     margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .tech-tags {
@@ -291,9 +360,36 @@ body {
     border-radius: 25px;
     font-size: 0.85rem;
     font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-/* Contact Section */
+.tech-tag:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(106, 90, 205, 0.3));
+    transform: translateY(-2px);
+}
+
+.project-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-sm {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-primary-custom.btn-sm {
+    padding: 8px 20px;
+}
+
+.btn-outline-custom.btn-sm {
+    padding: 6px 12px;
+    border-width: 1px;
+}
+
+/* === Contact Section === */
 .contact-section {
     padding: 100px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
@@ -311,7 +407,6 @@ body {
     background-size: cover;
 }
 
-/* Contact Cards */
 .contact-card {
     background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.7));
     border: 1px solid rgba(0, 212, 255, 0.2);
@@ -334,7 +429,6 @@ body {
     background-clip: text;
 }
 
-/* Contact Items */
 .contact-item {
     display: flex;
     align-items: center;
@@ -391,7 +485,6 @@ body {
     font-size: 0.95rem;
 }
 
-/* Contact Form */
 .contact-form-card {
     background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.7));
     border: 1px solid rgba(0, 212, 255, 0.2);
@@ -413,9 +506,10 @@ body {
     background-clip: text;
 }
 
-/* Form Styles */
+/* === Form Styles === */
 .form-group {
     margin-bottom: 25px;
+    position: relative;
 }
 
 .form-label {
@@ -453,7 +547,6 @@ body {
     border-color: rgba(244, 67, 54, 0.3);
 }
 
-/* Form Check */
 .form-check {
     margin-top: 20px;
 }
@@ -484,7 +577,6 @@ body {
     color: #6a5acd;
 }
 
-/* Form Errors */
 .form-error {
     color: #f44336;
     font-size: 0.85rem;
@@ -496,7 +588,6 @@ body {
     display: block;
 }
 
-/* Submit Button */
 .btn-block {
     width: 100%;
     display: flex;
@@ -505,7 +596,6 @@ body {
     gap: 10px;
 }
 
-/* Loading Spinner */
 .loading-spinner {
     display: inline-block;
     width: 20px;
@@ -519,53 +609,6 @@ body {
 @keyframes spin {
     to {
         transform: rotate(360deg);
-    }
-}
-
-/* Social Links in Contact */
-.contact-card .social-links {
-    justify-content: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(0, 212, 255, 0.1);
-}
-
-.contact-card .social-link {
-    width: 45px;
-    height: 45px;
-    font-size: 1.1rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .contact-card,
-    .contact-form-card {
-        padding: 30px 20px;
-    }
-
-    .contact-item {
-        padding: 15px;
-    }
-
-    .contact-icon {
-        font-size: 1.3rem;
-        margin-left: 15px;
-        width: 40px;
-    }
-
-    .form-control {
-        padding: 12px 15px;
-    }
-}
-
-@media (max-width: 576px) {
-    .contact-section {
-        padding: 60px 0;
-    }
-
-    .contact-card-title,
-    .contact-form-title {
-        font-size: 1.3rem;
     }
 }
 
@@ -604,7 +647,20 @@ body {
     color: #ffffff;
 }
 
-/* === Add Project Button === */
+.contact-card .social-links {
+    justify-content: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.contact-card .social-link {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+}
+
+/* === Floating Buttons === */
 .add-project-btn {
     position: fixed;
     bottom: 30px;
@@ -624,6 +680,8 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
 }
 
 .add-project-btn:hover {
@@ -632,7 +690,6 @@ body {
     color: white;
 }
 
-/* === Scroll to Top === */
 .scroll-to-top {
     position: fixed;
     bottom: 30px;
@@ -660,6 +717,186 @@ body {
 .scroll-to-top:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6);
+}
+
+/* === Modal Styles === */
+.modal {
+    backdrop-filter: blur(15px);
+}
+
+.modal-content {
+    background: linear-gradient(145deg, rgba(10, 10, 10, 0.95), rgba(26, 26, 46, 0.98));
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 20px;
+    color: #ffffff;
+    backdrop-filter: blur(25px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+    padding: 25px 30px 15px;
+    background: rgba(0, 212, 255, 0.05);
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00d4ff, #6a5acd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.modal-body {
+    padding: 30px;
+    background: rgba(10, 10, 10, 0.8);
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
+    padding: 20px 30px;
+    background: rgba(0, 212, 255, 0.03);
+    border-radius: 0 0 20px 20px;
+}
+
+.btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.modal .form-label {
+    color: #00d4ff;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.modal .form-control {
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 14px 18px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.modal .form-control:focus {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 0.3rem rgba(0, 212, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.modal .form-control::placeholder {
+    color: rgba(192, 192, 192, 0.6);
+}
+
+.modal select.form-control {
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.modal select.form-control option {
+    background: #1a1a2e;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.modal select.form-control:focus {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: #00d4ff;
+}
+
+.modal-backdrop {
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 46, 0.8));
+    backdrop-filter: blur(10px);
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+}
+
+.modal .btn-secondary {
+    background: rgba(192, 192, 192, 0.1);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    color: #c0c0c0;
+    padding: 12px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.modal .btn-secondary:hover {
+    background: rgba(192, 192, 192, 0.2);
+    border-color: rgba(192, 192, 192, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.modal .btn-primary-custom {
+    background: linear-gradient(135deg, #00d4ff, #6a5acd);
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.modal .btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+}
+
+.form-group:focus-within .form-label {
+    color: #6a5acd;
+    transform: translateX(-5px);
+}
+
+.modal .text-muted {
+    color: rgba(192, 192, 192, 0.7) !important;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.modal.fade .modal-content {
+    transform: translateY(-50px) scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* === Animation for new projects === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio-card.new-project {
+    animation: fadeInUp 0.6s ease-out;
 }
 
 /* === Responsive Design === */
@@ -698,22 +935,76 @@ body {
         text-align: center;
         justify-content: center;
     }
+
+    .contact-card,
+    .contact-form-card {
+        padding: 30px 20px;
+    }
+
+    .contact-item {
+        padding: 15px;
+    }
+
+    .contact-icon {
+        font-size: 1.3rem;
+        margin-left: 15px;
+        width: 40px;
+    }
+
+    .form-control {
+        padding: 12px 15px;
+    }
+
+    .modal-content {
+        margin: 20px;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 20px;
+    }
+
+    .modal-title {
+        font-size: 1.4rem;
+    }
+
+    .modal .form-control {
+        padding: 12px 15px;
+    }
+
+    .portfolio-section {
+        padding: 60px 0;
+    }
+
+    .portfolio-card {
+        margin-bottom: 20px;
+    }
+
+    .portfolio-content {
+        padding: 20px;
+    }
+
+    .portfolio-title {
+        font-size: 1.2rem;
+    }
+
+    .project-actions {
+        justify-content: center;
+    }
+
+    .empty-state {
+        padding: 40px 20px;
+    }
 }
 
-/* === Custom Scrollbar === */
-::-webkit-scrollbar {
-    width: 8px;
-}
+@media (max-width: 576px) {
+    .contact-section {
+        padding: 60px 0;
+    }
 
-::-webkit-scrollbar-track {
-    background: #1a1a2e;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #00d4ff, #6a5acd);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #00b8e6, #5a4cb2);
+    .contact-card-title,
+    .contact-form-title {
+        font-size: 1.3rem;
+    }
 }
