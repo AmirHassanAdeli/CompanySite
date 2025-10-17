@@ -21,8 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='insecure-dev-key')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://companysite-fwyz.onrender.com']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'companysite-fwyz.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
