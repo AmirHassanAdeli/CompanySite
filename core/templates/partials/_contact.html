@@ -1,0 +1,122 @@
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title">تماس با ما</h2>
+        <p class="section-subtitle">آماده همکاری و پاسخ‌گویی به سوالات شما هستیم</p>
+
+        <div class="row justify-content-center">
+            <!-- اطلاعات تماس -->
+            <div class="col-lg-5 mb-4">
+                <div class="contact-card">
+                    <h4 class="contact-card-title">راه‌های ارتباطی</h4>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <div>
+                            <h5 class="contact-item-title">ایمیل</h5>
+                            <p class="contact-item-text">info@aiportfolio.ir</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <div>
+                            <h5 class="contact-item-title">تلفن</h5>
+                            <p class="contact-item-text">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <div>
+                            <h5 class="contact-item-title">آدرس</h5>
+                            <p class="contact-item-text">تهران، خیابان ولیعصر، پلاک ۱۲۳</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fab fa-telegram contact-icon"></i>
+                        <div>
+                            <h5 class="contact-item-title">تلگرام</h5>
+                            <p class="contact-item-text">@aiportfolio</p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link" title="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- فرم تماس -->
+            <div class="col-lg-7">
+                <div class="contact-form-card">
+                    <h4 class="contact-form-title">پیام مستقیم</h4>
+
+                    <form method="post" action="{% url 'core:contact_submit' %}" id="contactForm">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">نام و نام خانوادگی *</label>
+                                    <input type="text" id="name" name="name" class="form-control" required
+                                           placeholder="نام کامل خود را وارد کنید">
+                                    <div class="form-error" id="nameError"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">ایمیل *</label>
+                                    <input type="email" id="email" name="email" class="form-control" required
+                                           placeholder="example@email.com">
+                                    <div class="form-error" id="emailError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company" class="form-label">شرکت (اختیاری)</label>
+                            <input type="text" id="company" name="company" class="form-control"
+                                   placeholder="نام شرکت یا سازمان">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">پیام شما *</label>
+                            <textarea id="message" name="message" rows="6" class="form-control" required
+                                      placeholder="پیام خود را اینجا بنویسید..."></textarea>
+                            <div class="form-error" id="messageError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" id="privacy" name="privacy" class="form-check-input" required>
+                                <label for="privacy" class="form-check-label">
+                                    با <a href="#" style="color: #00d4ff;">قوانین حریم خصوصی</a> موافقم
+                                </label>
+                                <div class="form-error" id="privacyError"></div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary-custom btn-block" id="submitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            <span id="submitText">ارسال پیام</span>
+                            <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

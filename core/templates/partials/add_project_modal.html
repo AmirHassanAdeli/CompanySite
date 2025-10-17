@@ -1,0 +1,52 @@
+<div class="modal fade" id="addProjectModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">افزودن پروژه جدید</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addProjectForm">
+                    <div class="mb-3">
+                        <label for="projectTitle" class="form-label">عنوان پروژه</label>
+                        <input type="text" class="form-control" id="projectTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectDescription" class="form-label">توضیحات</label>
+                        <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectTech" class="form-label">تکنولوژی‌ها (با کاما جدا کنید)</label>
+                        <input type="text" class="form-control" id="projectTech"
+                               placeholder="مثال: Python, TensorFlow, OpenCV">
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectIcon" class="form-label">آیکون (Font Awesome class)</label>
+                        <input type="text" class="form-control" id="projectIcon" placeholder="مثال: fas fa-robot"
+                               value="fas fa-cog">
+                    </div>
+                    <div class="mb-3">
+                        <label for="projectColor" class="form-label">رنگ پس‌زمینه</label>
+                        <select class="form-control" id="projectColor">
+                            <option value="linear-gradient(135deg, #00d4ff 0%, #6a5acd 50%, #c0c0c0 100%)">آبی
+                                فیروزه‌ای-بنفش-نقره‌ای
+                            </option>
+                            <option value="linear-gradient(135deg, #00d4ff 20%, #6a5acd 80%)">آبی فیروزه‌ای-بنفش
+                            </option>
+                            <option value="linear-gradient(135deg, #6a5acd 0%, #c0c0c0 60%, #00d4ff 100%)">
+                                بنفش-نقره‌ای-آبی
+                            </option>
+                            <option value="linear-gradient(135deg, #c0c0c0 0%, #00d4ff 50%, #6a5acd 100%)">
+                                نقره‌ای-آبی-بنفش
+                            </option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn-primary-custom" onclick="addProject()">افزودن پروژه</button>
+            </div>
+        </div>
+    </div>
+</div>
