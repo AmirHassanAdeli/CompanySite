@@ -1,28 +1,11 @@
 # views.py
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
-from django.conf import settings
-from django.core.mail import send_mail
+from django.shortcuts import render
 from django.contrib import messages
-from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
 import logging
 from .models import Service, Project, TeamMember
 from .forms import ContactForm
 
 logger = logging.getLogger(__name__)
-
-
-def get_client_ip(request):
-    """Get client IP address"""
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
 
 
 def index(request):
