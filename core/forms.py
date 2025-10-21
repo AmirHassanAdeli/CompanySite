@@ -69,30 +69,36 @@ class ProjectForm(forms.ModelForm):
                 'placeholder': 'عنوان پروژه',
                 'required': True
             }),
+
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'توضیحات کامل پروژه...',
                 'rows': 4,
                 'required': True
             }),
+
             'technologies': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'JavaScript, React, Python, Django...',
                 'required': True
             }),
+
             'icon': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'fas fa-code',
                 'required': True
             }),
+
             'category': forms.Select(attrs={
                 'class': 'form-control',
                 'required': True
             }),
+
             'demo_url': forms.URLInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'https://example.com'
             }),
+
             'github_url': forms.URLInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'https://github.com/username/repo'

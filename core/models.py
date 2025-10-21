@@ -9,8 +9,6 @@ class Service(models.Model):
     description = models.TextField(verbose_name="توضیحات")
     icon = models.CharField(max_length=100, verbose_name="آیکون", help_text="کلاس Font Awesome")
     order = models.IntegerField(default=0, verbose_name="ترتیب نمایش")
-    is_active = models.BooleanField(default=True, verbose_name="فعال")
-    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "سرویس"
@@ -40,15 +38,11 @@ class Project(models.Model):
     demo_url = models.URLField(verbose_name="آدرس دمو", blank=True)
     github_url = models.URLField(verbose_name="آدرس گیت‌هاب", blank=True)
     order = models.IntegerField(default=0, verbose_name="ترتیب نمایش")
-    published = models.BooleanField(default=False, verbose_name="منتشر شده")
-    featured = models.BooleanField(default=False, verbose_name="ویژه")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "پروژه"
         verbose_name_plural = "پروژه‌ها"
-        ordering = ['order', '-created_at']
+        ordering = ['order', ]
 
     def __str__(self):
         return self.title
@@ -64,8 +58,6 @@ class TeamMember(models.Model):
     bio = models.TextField(verbose_name="بیوگرافی")
     image = models.ImageField(upload_to='team/', verbose_name="تصویر")
     order = models.IntegerField(default=0, verbose_name="ترتیب نمایش")
-    is_active = models.BooleanField(default=True, verbose_name="فعال")
-    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "عضو تیم"
@@ -79,7 +71,7 @@ class TeamMember(models.Model):
 class Contact(models.Model):
     first_name = models.CharField(max_length=100, verbose_name="نام", validators=[MinLengthValidator(2)])
     last_name = models.CharField(max_length=100, verbose_name="نام خانوادگی", validators=[MinLengthValidator(2)])
-    phone = models.CharField(max_length=15, verbose_name="تلفن",)
+    phone = models.CharField(max_length=15, verbose_name="تلفن", )
     email = models.EmailField(verbose_name="ایمیل")
 
     def __str__(self):
@@ -99,7 +91,6 @@ class ContactInfo(models.Model):
     value = models.CharField(max_length=200, verbose_name="مقدار")
     icon = models.CharField(max_length=100, verbose_name="آیکون", help_text="کلاس Font Awesome")
     order = models.IntegerField(default=0, verbose_name="ترتیب نمایش")
-    is_active = models.BooleanField(default=True, verbose_name="فعال")
 
     class Meta:
         verbose_name = "اطلاعات تماس"
