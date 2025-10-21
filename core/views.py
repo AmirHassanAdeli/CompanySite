@@ -40,7 +40,7 @@ def contact_submit(request):
 
 def thanks(request):
     """صفحه تشکر پس از ارسال فرم"""
-    return render(request, 'partials/thanks.html')
+    return render(request, 'partials/_thanks.html')
 
 
 def project_detail(request):

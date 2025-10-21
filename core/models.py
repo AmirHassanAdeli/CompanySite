@@ -74,8 +74,12 @@ class Contact(models.Model):
     phone = models.CharField(max_length=15, verbose_name="تلفن", )
     email = models.EmailField(verbose_name="ایمیل")
 
+    class Meta:
+        verbose_name = "ارتباط"
+        verbose_name_plural = "ارتباطات"
+
     def __str__(self):
-        return f"{self.first_name} - {self.first_name} - {self.phone} - {self.email}"
+        return f"{self.first_name} - {self.last_name} - {self.phone} - {self.email}"
 
 
 class ContactInfo(models.Model):
