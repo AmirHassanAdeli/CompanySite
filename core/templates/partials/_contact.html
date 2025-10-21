@@ -64,57 +64,54 @@
                 <div class="contact-form-card">
                     <h4 class="contact-form-title">پیام مستقیم</h4>
 
-                    <form method="post" action="{% url 'core:contact_submit' %}" id="contactForm">
-                        {% csrf_token %}
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name" class="form-label">نام و نام خانوادگی *</label>
-                                    <input type="text" id="name" name="name" class="form-control" required
-                                           placeholder="نام کامل خود را وارد کنید">
-                                    <div class="form-error" id="nameError"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email" class="form-label">ایمیل *</label>
-                                    <input type="email" id="email" name="email" class="form-control" required
-                                           placeholder="example@email.com">
-                                    <div class="form-error" id="emailError"></div>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="form-label">نام و نام خانوادگی *</label>
+                                <input type="text" id="name" name="name" class="form-control" required
+                                       placeholder="نام کامل خود را وارد کنید">
+                                <div class="form-error" id="nameError"></div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="company" class="form-label">شرکت (اختیاری)</label>
-                            <input type="text" id="company" name="company" class="form-control"
-                                   placeholder="نام شرکت یا سازمان">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message" class="form-label">پیام شما *</label>
-                            <textarea id="message" name="message" rows="6" class="form-control" required
-                                      placeholder="پیام خود را اینجا بنویسید..."></textarea>
-                            <div class="form-error" id="messageError"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input type="checkbox" id="privacy" name="privacy" class="form-check-input" required>
-                                <label for="privacy" class="form-check-label">
-                                    با <a href="#" style="color: #00d4ff;">قوانین حریم خصوصی</a> موافقم
-                                </label>
-                                <div class="form-error" id="privacyError"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email" class="form-label">ایمیل *</label>
+                                <input type="email" id="email" name="email" class="form-control" required
+                                       placeholder="example@email.com">
+                                <div class="form-error" id="emailError"></div>
                             </div>
                         </div>
+                    </div>
 
-                        <button type="submit" class="btn-primary-custom btn-block" id="submitBtn">
-                            <i class="fas fa-paper-plane me-2"></i>
-                            <span id="submitText">ارسال پیام</span>
-                            <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
-                        </button>
-                    </form>
+                    <div class="form-group">
+                        <label for="company" class="form-label">شرکت (اختیاری)</label>
+                        <input type="text" id="company" name="company" class="form-control"
+                               placeholder="نام شرکت یا سازمان">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">پیام شما *</label>
+                        <textarea id="message" name="message" rows="6" class="form-control" required
+                                  placeholder="پیام خود را اینجا بنویسید..."></textarea>
+                        <div class="form-error" id="messageError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="privacy" name="privacy" class="form-check-input" required>
+                            <label for="privacy" class="form-check-label">
+                                با <a href="#" style="color: #00d4ff;">قوانین حریم خصوصی</a> موافقم
+                            </label>
+                            <div class="form-error" id="privacyError"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary-custom btn-block" id="submitBtn">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        <span id="submitText">ارسال پیام</span>
+                        <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
+                    </button>
                 </div>
             </div>
         </div>

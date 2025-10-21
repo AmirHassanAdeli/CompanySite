@@ -37,8 +37,6 @@ class Project(models.Model):
     category = models.CharField(max_length=20, choices=PROJECT_CATEGORIES, default='web')
     icon = models.CharField(max_length=100, verbose_name="آیکون", default='fas fa-cog',
                             help_text="کلاس Font Awesome")
-    color = models.CharField(max_length=200, verbose_name="رنگ پس‌زمینه",
-                             default='linear-gradient(135deg, #00d4ff 0%, #6a5acd 50%, #c0c0c0 100%)')
     demo_url = models.URLField(verbose_name="آدرس دمو", blank=True)
     github_url = models.URLField(verbose_name="آدرس گیت‌هاب", blank=True)
     order = models.IntegerField(default=0, verbose_name="ترتیب نمایش")
@@ -65,10 +63,6 @@ class TeamMember(models.Model):
     position = models.CharField(max_length=100, verbose_name="سمت")
     bio = models.TextField(verbose_name="بیوگرافی")
     image = models.ImageField(upload_to='team/', verbose_name="تصویر")
-    email = models.EmailField(verbose_name="ایمیل", blank=True)
-    phone = models.CharField(max_length=15, verbose_name="تلفن", blank=True)
-    linkedin_url = models.URLField(verbose_name="لینکدین", blank=True)
-    github_url = models.URLField(verbose_name="گیت‌هاب", blank=True)
     order = models.IntegerField(default=0, verbose_name="ترتیب نمایش")
     is_active = models.BooleanField(default=True, verbose_name="فعال")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -82,41 +76,14 @@ class TeamMember(models.Model):
         return f"{self.name} - {self.position}"
 
 
-class ContactMessage(models.Model):
-    STATUS_CHOICES = [
-        ('new', 'جدید'),
-        ('read', 'خوانده شده'),
-        ('replied', 'پاسخ داده شده'),
-        ('spam', 'اسپم'),
-    ]
-
-    name = models.CharField(max_length=100, verbose_name="نام", validators=[MinLengthValidator(2)])
+class Contact(models.Model):
+    first_name = models.CharField(max_length=100, verbose_name="نام", validators=[MinLengthValidator(2)])
+    last_name = models.CharField(max_length=100, verbose_name="نام خانوادگی", validators=[MinLengthValidator(2)])
+    phone = models.CharField(max_length=15, verbose_name="تلفن",)
     email = models.EmailField(verbose_name="ایمیل")
-    company = models.CharField(max_length=100, verbose_name="شرکت", blank=True)
-    phone = models.CharField(max_length=15, verbose_name="تلفن", blank=True)
-    subject = models.CharField(max_length=200, verbose_name="موضوع", blank=True)
-    message = models.TextField(verbose_name="پیام", validators=[MinLengthValidator(10)])
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='new')
-    ip_address = models.GenericIPAddressField(verbose_name="آدرس IP", null=True, blank=True)
-    user_agent = models.TextField(verbose_name="User Agent", blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "پیام تماس"
-        verbose_name_plural = "پیام‌های تماس"
-        ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.name} - {self.email}"
-
-    def mark_as_read(self):
-        self.status = 'read'
-        self.save()
-
-    def mark_as_replied(self):
-        self.status = 'replied'
-        self.save()
+        return f"{self.first_name} - {self.first_name} - {self.phone} - {self.email}"
 
 
 class ContactInfo(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, Project, TeamMember, ContactMessage
+from .models import Service, Project, TeamMember, Contact
 
 
 @admin.register(Service)
@@ -29,21 +29,8 @@ class TeamMemberAdmin(admin.ModelAdmin):
     ordering = ['order']
 
 
-@admin.register(ContactMessage)
+@admin.register(Contact)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'status', 'created_at']
-    list_filter = ['status', 'created_at']
-    search_fields = ['name', 'email', 'message']
-    readonly_fields = ['created_at', 'updated_at', 'ip_address', 'user_agent']
+    list_display = ['first_name', 'last_name', 'phone', 'email']
+    search_fields = ['first_name', 'last_name', 'phone', 'email']
 
-    def mark_as_read(self, request, queryset):
-        queryset.update(status='read')
-
-    mark_as_read.short_description = 'علامت‌گذاری به عنوان خوانده شده'
-
-    def mark_as_replied(self, request, queryset):
-        queryset.update(status='replied')
-
-    mark_as_replied.short_description = 'علامت‌گذاری به عنوان پاسخ داده شده'
-
-    actions = [mark_as_read, mark_as_replied]

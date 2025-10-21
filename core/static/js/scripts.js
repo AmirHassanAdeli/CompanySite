@@ -12,6 +12,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+
 // === Navbar Scroll Effect ===
 window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.navbar');
@@ -25,6 +26,7 @@ window.addEventListener('scroll', function () {
         }
     }
 });
+
 
 // === Counter Animation ===
 function animateCounters() {
@@ -45,178 +47,6 @@ function animateCounters() {
     });
 }
 
-// === Add Project Modal Handler ===
-function initializeProjectModal() {
-    const addProjectForm = document.getElementById('addProjectForm');
-    const addProjectModal = document.getElementById('addProjectModal');
-
-    if (addProjectForm) {
-        addProjectForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            submitProjectForm();
-        });
-    }
-
-    // ریست فرم وقتی مدال بسته می‌شود
-    if (addProjectModal) {
-        addProjectModal.addEventListener('hidden.bs.modal', function () {
-            resetProjectForm();
-        });
-    }
-}
-
-// === Submit Project Form ===
-function submitProjectForm() {
-    const form = document.getElementById('addProjectForm');
-    const formData = new FormData(form);
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-
-    // نمایش حالت لودینگ
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال افزودن...';
-    submitBtn.disabled = true;
-
-    // ارسال درخواست AJAX
-    fetch('/projects/ajax-add/', {
-        method: 'POST',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRFToken': getCSRFToken(),
-        },
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                // موفقیت آمیز
-                showNotification(data.message, 'success');
-
-                // اضافه کردن پروژه به لیست
-                addProjectToDOM(data.project);
-
-                // بستن مدال
-                const modal = bootstrap.Modal.getInstance(document.getElementById('addProjectModal'));
-                if (modal) {
-                    modal.hide();
-                }
-
-                // ریست فرم
-                resetProjectForm();
-
-            } else {
-                // نمایش خطاها
-                if (data.errors) {
-                    displayFormErrors(data.errors);
-                } else {
-                    showNotification(data.error || 'خطایی رخ داده است', 'error');
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showNotification('خطا در ارتباط با سرور', 'error');
-        })
-        .finally(() => {
-            // بازگشت دکمه به حالت عادی
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-        });
-}
-
-// === Add Project to DOM ===
-function addProjectToDOM(project) {
-    const portfolioContainer = document.getElementById('portfolioContainer');
-
-    if (portfolioContainer) {
-        const projectHTML = `
-            <div class="col-lg-4 col-md-6 mb-4" data-project-id="${project.id}">
-                <div class="portfolio-card new-project">
-                    <div class="portfolio-image" style="background: ${project.color};">
-                        <i class="${project.icon}"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">${project.title}</h3>
-                        <p class="portfolio-description">${project.description}</p>
-                        <div class="tech-tags">
-                            ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                        </div>
-                        <div class="project-actions mt-3">
-                            <span class="badge bg-warning">در انتظار تایید</span>
-                            <button class="btn-outline-custom btn-sm view-details-btn" data-project-id="${project.id}">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        portfolioContainer.insertAdjacentHTML('afterbegin', projectHTML);
-
-        // انیمیشن برای پروژه جدید
-        animateNewProject(portfolioContainer.firstElementChild);
-
-        // اضافه کردن event listener برای دکمه جزئیات
-        const viewDetailsBtn = portfolioContainer.querySelector(`[data-project-id="${project.id}"] .view-details-btn`);
-        if (viewDetailsBtn) {
-            viewDetailsBtn.addEventListener('click', function() {
-                viewProjectDetails(project.id);
-            });
-        }
-    }
-}
-
-// === Display Form Errors ===
-function displayFormErrors(errors) {
-    // پاک کردن خطاهای قبلی
-    clearFormErrors();
-
-    // نمایش خطاهای جدید
-    for (const field in errors) {
-        const input = document.getElementById(`project${field.charAt(0).toUpperCase() + field.slice(1)}`);
-        if (input) {
-            input.style.borderColor = '#f44336';
-            const errorElement = document.createElement('div');
-            errorElement.className = 'form-error show';
-            errorElement.textContent = errors[field];
-            input.parentNode.appendChild(errorElement);
-        }
-    }
-}
-
-// === Clear Form Errors ===
-function clearFormErrors() {
-    const errorElements = document.querySelectorAll('.form-error');
-    errorElements.forEach(element => element.remove());
-
-    const inputs = document.querySelectorAll('#addProjectForm .form-control');
-    inputs.forEach(input => {
-        input.style.borderColor = 'rgba(0, 212, 255, 0.3)';
-    });
-}
-
-// === Reset Project Form ===
-function resetProjectForm() {
-    const form = document.getElementById('addProjectForm');
-    if (form) {
-        form.reset();
-        clearFormErrors();
-    }
-}
-
-// === Get CSRF Token ===
-function getCSRFToken() {
-    const cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('csrftoken='))
-        ?.split('=')[1];
-    return cookieValue || '';
-}
 
 // === Notification System ===
 function showNotification(message, type = 'success') {
@@ -255,6 +85,7 @@ function showNotification(message, type = 'success') {
     }, 4000);
 }
 
+
 // === Scroll to Top ===
 function initializeScrollToTop() {
     const scrollBtn = document.createElement('button');
@@ -284,6 +115,7 @@ function initializeScrollToTop() {
     toggleScrollButton();
 }
 
+
 // === Intersection Observer for Animations ===
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -302,28 +134,6 @@ const observer = new IntersectionObserver((entries) => {
     rootMargin: '0px 0px -50px 0px'
 });
 
-// === Animate New Project ===
-function animateNewProject(element) {
-    if (!element) return;
-
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    element.style.transition = 'all 0.5s ease';
-
-    setTimeout(() => {
-        element.style.opacity = '1';
-        element.style.transform = 'translateY(0)';
-    }, 100);
-}
-
-// === View Project Details ===
-function viewProjectDetails(projectId) {
-    // این تابع می‌تواند برای نمایش جزئیات پروژه استفاده شود
-    console.log('Viewing project details:', projectId);
-    // می‌توانید اینجا modal جدیدی برای نمایش جزئیات باز کنید
-    // یا کاربر را به صفحه جزئیات پروژه هدایت کنید
-    window.location.href = `/projects/${projectId}/`;
-}
 
 // === Initialize Portfolio Animations ===
 function initializePortfolioAnimations() {
@@ -347,57 +157,14 @@ function initializePortfolioAnimations() {
     });
 }
 
-// === Form Validation ===
-function initializeFormValidation() {
-    const formInputs = document.querySelectorAll('#addProjectForm input, #addProjectForm textarea, #addProjectForm select');
-    formInputs.forEach(input => {
-        input.addEventListener('input', function () {
-            if (this.value.trim()) {
-                this.style.borderColor = 'rgba(0, 212, 255, 0.3)';
-                const errorElement = this.nextElementSibling;
-                if (errorElement && errorElement.classList.contains('form-error')) {
-                    errorElement.remove();
-                }
-            }
-        });
-
-        // اضافه کردن اعتبارسنجی بلادرنگ
-        input.addEventListener('blur', function() {
-            if (this.hasAttribute('required') && !this.value.trim()) {
-                this.style.borderColor = '#f44336';
-            }
-        });
-    });
-}
-
-// === Contact Form Handler ===
-function initializeContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('#submitBtn');
-            const submitText = this.querySelector('#submitText');
-            const loadingSpinner = this.querySelector('#loadingSpinner');
-
-            if (submitBtn && submitText && loadingSpinner) {
-                submitText.textContent = 'در حال ارسال...';
-                loadingSpinner.style.display = 'inline-block';
-                submitBtn.disabled = true;
-            }
-        });
-    }
-}
 
 // === Initialize when page loads ===
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Portfolio website loaded successfully!');
 
     // Initialize all components
-    initializeProjectModal();
     initializeScrollToTop();
     initializePortfolioAnimations();
-    initializeFormValidation();
-    initializeContactForm();
 
     // Initialize intersection observer for animations
     const sections = document.querySelectorAll('section');
@@ -412,8 +179,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
 // === Error Handling ===
-window.addEventListener('error', function(e) {
+window.addEventListener('error', function (e) {
     console.error('Global error:', e.error);
     showNotification('خطایی در اجرای صفحه رخ داده است', 'error');
 });
