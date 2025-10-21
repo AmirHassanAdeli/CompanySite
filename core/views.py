@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     try:
-        services = Service.objects.filter(is_active=True).order_by('order')[:6]
-        projects = Project.objects.filter(published=True).order_by('order')[:6]
-        team = TeamMember.objects.filter(is_active=True).order_by('order')[:6]
+        services = Service.objects.all()
+        projects = Project.objects.all()
+        team = TeamMember.objects.all()
         form = ContactForm()
 
         context = {
