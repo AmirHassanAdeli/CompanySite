@@ -1,0 +1,109 @@
+<section id="contact" class="contact-section py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-3">تماس با ما</h2>
+        <p class="section-subtitle text-center mb-5">آماده همکاری و پاسخ‌گویی به سوالات شما هستیم</p>
+
+        <div class="row justify-content-center">
+            <!-- اطلاعات تماس -->
+            <div class="col-lg-5 mb-4">
+                <div class="contact-card p-4 rounded shadow-sm">
+                    <h4 class="contact-card-title mb-4">راه‌های ارتباطی</h4>
+
+                    <div class="contact-item d-flex align-items-center mb-3">
+                        <i class="fas fa-envelope contact-icon text-primary"></i>
+                        <div class="me-3">
+                            <h5 class="contact-item-title mb-1">ایمیل</h5>
+                            <p class="contact-item-text mb-0">info@aiportfolio.ir</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item d-flex align-items-center mb-3">
+                        <i class="fas fa-phone contact-icon text-primary"></i>
+                        <div class="me-3">
+                            <h5 class="contact-item-title mb-1">تلفن</h5>
+                            <p class="contact-item-text mb-0">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item d-flex align-items-center mb-3">
+                        <i class="fas fa-map-marker-alt contact-icon text-primary"></i>
+                        <div class="me-3">
+                            <h5 class="contact-item-title mb-1">آدرس</h5>
+                            <p class="contact-item-text mb-0">تهران، خیابان ولیعصر، پلاک ۱۲۳</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item d-flex align-items-center mb-4">
+                        <i class="fab fa-telegram contact-icon text-primary"></i>
+                        <div class="me-3">
+                            <h5 class="contact-item-title mb-1">تلگرام</h5>
+                            <p class="contact-item-text mb-0">@aiportfolio</p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-links d-flex gap-3 mt-4">
+                        <a href="#" class="social-link btn btn-outline-light btn-sm rounded-circle" title="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="social-link btn btn-outline-light btn-sm rounded-circle" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link btn btn-outline-light btn-sm rounded-circle" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link btn btn-outline-light btn-sm rounded-circle" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- فرم تماس -->
+            <div class="col-lg-7">
+                <div class="contact-form-card p-4 rounded shadow-sm">
+                    <h4 class="contact-form-title mb-4">پیام مستقیم</h4>
+
+                    <form id="contactForm" class="contact-form">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="name" class="form-label">نام و نام خانوادگی *</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                    <div class="form-error text-danger small mt-1" id="nameError"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="phone" class="form-label">تلفن *</label>
+                                    <input type="text" id="phone" name="phone" class="form-control" required
+                                           placeholder="09123456789">
+                                    <div class="form-error text-danger small mt-1" id="phoneError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="message" class="form-label">پیام شما *</label>
+                            <textarea id="message" name="message" rows="6" class="form-control" required
+                                      placeholder="پیام خود را اینجا بنویسید..."></textarea>
+                            <div class="form-error text-danger small mt-1" id="messageError"></div>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary-custom w-100 d-flex align-items-center justify-content-center"
+                                id="submitBtn">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            <span id="submitText">ارسال پیام</span>
+                            <div class="loading-spinner spinner-border spinner-border-sm ms-2" id="loadingSpinner"
+                                 style="display: none;"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
